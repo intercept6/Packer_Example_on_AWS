@@ -6,7 +6,7 @@
 
     "builders": [{
         "type": "amazon-ebs",
-        "region": "{{user `aws_region`}}",
+        "region": "ap-northeast-1",
         "instance_type": "t2.micro",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `aws_ami_name`}}",
