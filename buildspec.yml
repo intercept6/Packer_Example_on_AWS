@@ -4,10 +4,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "HashiCorp Packer をインストール中..."
-      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.2.2/packer_1.2.2_linux_amd64.zip && unzip packer.zip
-      - echo "jq をインストール中..."
-      - curl -qL -o jq https://stedolan.github.io/jq/download/linux64/jq && chmod +x ./jq
       - echo "amazon-linux-2_packer-template.json をバリデーションします"
       - ./packer validate amazon-linux-2_packer-template.json
   build:
