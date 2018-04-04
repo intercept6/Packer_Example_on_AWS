@@ -4,17 +4,20 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - $(aws ecr get-login --no-include-email)
-      - echo "amazon-linux-2_packer-template.json をバリデーションします"
+      - echo 'Install Packer 1.2.2'
+      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.2.2/packer_1.2.2_linux_amd64.zip && unzip packer.zip
+      - echo 'Install Ansible'
+      - apt-get update -y
+      - apt-get install -y software-properties-common
+      - apt-add-repository ppa:ansible/ansible
+      - apt-get update -y
+      - apt-get install -y ansible
+      - echo 'Validate packer json'
       - ./packer validate amazon-linux-2_packer-template.json
   build:
     commands:
-      ### HashiCorp Packer cannot currently obtain the AWS CodeBuild-assigned role and its credentials
-      ### Manually capture and configure the AWS CLI to provide HashiCorp Packer with AWS credentials
-      ### More info here: https://github.com/mitchellh/packer/issues/4279
-      - aws configure set region $AWS_REGION
-      - echo "HashiCorp Packer のテンプレート amazon-linux-2_packer-template.json をビルド"
-      - ./packer build -debug amazon-linux-2_packer-template.json
+      - echo 'Build AMI'
+      - ./packer build amazon-linux-2_packer-template.json
   post_build:
     commands:
-      - echo "HashiCorp Packer によるビルドが完了しました。 `date`"
+      - echo "Build finished `date`"

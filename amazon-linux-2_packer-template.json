@@ -1,7 +1,7 @@
 {
     "variables": {
         "aws_region": "{{env `AWS_REGION`}}",
-        "aws_ami_name": "amazon-linux-2_test"
+        "aws_ami_name": "amazon-linux-2_test3"
     },
 
     "builders": [{
