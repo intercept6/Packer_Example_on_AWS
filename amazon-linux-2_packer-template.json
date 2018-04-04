@@ -1,7 +1,7 @@
 {
     "variables": {
         "aws_region": "{{env `AWS_REGION`}}",
-        "aws_ami_name": "customized-amzn2-ami-hvm-{{ timestamp }}-x86_64-gp2"
+        "aws_ami_name": "customized-amzn2-ami-hvm-{{isotime | clean_ami_name}}-x86_64-gp2"
     },
 
     "builders": [{
