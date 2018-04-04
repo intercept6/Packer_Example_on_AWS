@@ -4,6 +4,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - $(aws ecr get-login --no-include-email)
       - echo "amazon-linux-2_packer-template.json をバリデーションします"
       - ./packer validate amazon-linux-2_packer-template.json
   build:
