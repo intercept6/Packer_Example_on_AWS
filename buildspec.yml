@@ -4,8 +4,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Install Packer env:${packer_version}"
-      - curl -qL -o packer.zip "https://releases.hashicorp.com/packer/env:${packer_version}/packer_env:${packer_version}_linux_amd64.zip" && unzip packer.zip
+      - echo "Install Packer ${packer_version}"
+      - curl -qL -o packer.zip "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip" && unzip packer.zip
       - echo 'Install Ansible'
       - apt-get update -y
       - apt-get install -y software-properties-common
@@ -13,11 +13,11 @@ phases:
       - apt-get update -y
       - apt-get install -y ansible
       - echo 'Validate packer json'
-      - ./packer validate env:${packer_filepath}
+      - ./packer validate ${packer_filepath}
   build:
     commands:
       - echo 'Build AMI'
-      - ./packer build env:${packer_filepath}
+      - ./packer build ${packer_filepath}
   post_build:
     commands:
       - echo "Build finished `date`"
