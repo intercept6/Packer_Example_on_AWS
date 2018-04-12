@@ -1,12 +1,16 @@
 {
     "variables": {
-        "aws_region": "{{env `AWS_REGION`}}"
+        "aws_region": "{{env `aws_region`}}",
+        "project_name": "{{env `project_name`}}",
+        "image_name": "{{env `image_name`}}",
+        "instance_type": "{{env `instance_type`}}",
+        "playbook_path": "{{env `playbook_path`}}"
     },
 
     "builders": [{
         "type": "amazon-ebs",
         "region": "ap-northeast-1",
-        "instance_type": "t2.micro",
+        "instance_type": "{{instance_type}}",
         "ssh_username": "ec2-user",
         "ami_name": "customized-amzn2-ami-hvm-{{ isotime | clean_ami_name }}-x86_64-gp2",
         "ami_description": "Customized Amazon Linux 2",
@@ -25,10 +29,11 @@
     "provisioners": [
         {
             "type": "shell",
-            "inline": [
-                "sudo yum update -y",
-                "touch ~/check.txt"
-            ]
+            "inline": ["sudo yum update -y"]
+        },
+        {
+            "type": "ansible",
+            "playbook_file": "{{playbook_path}}"
         }
     ]
 }
