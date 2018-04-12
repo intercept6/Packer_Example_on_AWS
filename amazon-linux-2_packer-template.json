@@ -33,7 +33,7 @@
         },
         {
             "type": "ansible",
-            "playbook_file": "{{user `playbook_path`}}"
+            "playbook_file": "playbooks/httpd.yml"
         }
     ]
 }
