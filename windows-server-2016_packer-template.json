@@ -10,7 +10,7 @@
     "builders": [{
         "type": "amazon-ebs",
         "region": "{{user `aws_region`}}",
-        "instance_type": "{{instance_type}}",
+        "instance_type": "{{user `instance_type`}}",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `project_name}}-{{user `image_name`}}-Windows_Server-2016-Japanese-Full-Base-{{ isotime | clean_ami_name }}",
         "ami_description": "{{user `project_name}}-{{user `image_name`}}-Windows_Server-2016-Japanese-Full-Base-{{ isotime | clean_ami_name }}",
@@ -33,7 +33,7 @@
         },
         {
           "type": "ansible",
-          "playbook_file": "{{env `playbook_path`}}"
+          "playbook_file": "{{user `playbook_path`}}"
         },
         {
           "type": "powershell",
