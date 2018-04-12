@@ -13,11 +13,11 @@ phases:
       - apt-get update -y
       - apt-get install -y ansible
       - echo 'Validate packer json'
-      - ./packer validate ${packer_filepath}
+      - ./packer validate "${packer_filepath}"
   build:
     commands:
       - echo 'Build AMI'
-      - ./packer build ${packer_filepath}
+      - ./packer build "${packer_filepath}"
   post_build:
     commands:
       - echo "Build finished `date`"
